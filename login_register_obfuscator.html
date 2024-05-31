@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Login - Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        *,
+        *:before,
+        *:after {
+            padding: 1;
+            margin: 1;
+            box-sizing: border-box;
+
+        }
+
+        :root {
+            /* --theme-background: #000;
+            --theme-background-2: rgb(47, 47, 47);
+            --theme-background-transparent: rgba(0, 0, 0, 0.084);
+            --theme-background-2-transparent: rgba(47, 47, 47, 0.15);
+            --theme-foreground: #ffffff; */
+
+            --theme-background: #fff;
+            --theme-background-2: #ccc;
+            --theme-background-transparent: rgba(255, 255, 255, 0.084);
+            --theme-background-2-transparent: rgba(200, 200, 200, 0.15);
+            --theme-foreground: #000;
+            
+            --mobile-width:450px ;
+        }
+
+        body {
+            background-color: rgb(0, 0, 0);
+            background-image: linear-gradient(to bottom right, var(--theme-background), var(--theme-background-2));
+            width: 100%;
+            height: 100%;
+        }
+
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+
+        @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            .background {
+                width: 95%;
+            }
+        }
+
+
+        .background .shape {
+            height: 20ch;
+            width: 20ch;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .shape:first-child {
+            background: linear-gradient(#1845ad,
+                    #23a2f6);
+            left: -80px;
+            top: -80px;
+        }
+
+        .shape:last-child {
+            background: linear-gradient(to right,
+                    #ff522f74,
+                    #f0961981);
+            right: 80px;
+            bottom: -100px;
+        }
+
+        #div-sign-form,
+        #div-reg-form {
+            width: var(--mobile-width);
+            background-color: var(--theme-background-transparent);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+
+        }
+
+        @media only screen and (max-width:  var(--mobile-width)) {
+
+            /* For mobile phones: */
+            #div-sign-form,
+            #div-reg-form {
+                width: 100%;
+            }
+        }
+
+        #div-reg-form {
+            display: none;
+        }
+
+        .appear {
+            display: inline;
+            opacity: 1;
+            animation-name: appear;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        .disappear {
+            display: inline;
+            opacity: 0;
+            animation-name: disappear;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes disappear {
+            0% {
+                opacity: 1;
+            }
+
+            99% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+            }
+
+            99% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+                display: block;
+            }
+        }
+
+        form * {
+            font-family: 'Poppins', sans-serif;
+            color: var(--theme-foreground);
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: var(--theme-background-2-transparent);
+            border-radius: 10px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        ::placeholder {
+            color: var(--theme-foreground);
+        }
+
+
+        .ext {
+            width: 100%;
+            height: 6ch;
+            margin-top: 1ch;
+            padding: 1ch 5ch;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .but {
+            color: var(--theme-foreground);
+            background-color: var(--theme-background-2-transparent);
+            width: 10ch;
+            text-align: center;
+            padding-top: 1ch;
+            padding-bottom: 1ch;
+            width: 15ch;
+            border-radius: 1ch;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-right: 1ch;
+        }
+
+        .but:hover {
+            background-color: rgba(172, 92, 0, 0.722);
+            border-radius: .5ch;
+
+        }
+
+        .btnlgin {
+            transition: 0.3s;
+            transition-timing-function: ease-out;
+            background-color: #353535ce;
+            cursor: pointer;
+            border: 1px solid var(--theme-background-2-transparent);
+            background-color: var(--theme-background-2-transparent);
+        }
+
+        .btnlgin:hover {
+            background-color: #848484ce;
+            border-radius: .5ch;
+            border-color: #ffa931;
+        }
+
+
+        /* Style the animation */
+        #login-form,
+        #reg-form {
+            padding: 20px;
+        }
+
+        #regformshow-button,
+        #signinshowform-button {
+            color: var(--theme-foreground);
+            transition: 0.3s;
+            width: 15ch;
+            padding: 1ch;
+            background-color: var(--theme-background-2-transparent);
+            border: 1px solid rgba(128, 128, 128, 0);
+            border-radius: 1ch;
+        }
+
+        #regformshow-button:hover,
+        #signinshowform-button:hover {
+            border-color: #422700;
+            background-color: #848484ce;
+            border-radius: .5ch;
+        }
+
+        .switch {
+            margin-top: 1ch;
+            color: var(--theme-foreground);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background">
+        <div class="shape">
+
+        </div>
+
+        <div class="shape"></div>
+    </div>
+
+
+    <div id="div-sign-form" class="appear">
+        <form method="POST" id="login-form">
+            <h3>Hello, Again!</h3>
+
+            <label for="username">Username</label>
+            <input type="text" placeholder="username" name="username" id="username">
+
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" name="password" id="password">
+
+            <br>
+            <input type="submit" class="btnlgin" value="Login" />
+
+
+        </form>
+        <div class="ext">
+            <div class="but"> Google </div>
+            <div class="but"> Github </div>
+        </div>
+        <div class="switch">
+            Don't have an Account ? &nbsp;&nbsp;&nbsp; <button id="regformshow-button">Register</button>
+        </div>
+    </div>
+
+
+
+    <div id="div-reg-form" class="disappear">
+        <form method="POST" id="reg-form">
+            <h3>Register Here</h3>
+
+
+            <label for="username">Username</label>
+            <input type="text" placeholder="username" id="username" name="username">
+
+            <label for="Email">Email</label>
+            <input type="text" placeholder="Email" id="email" name="email">
+
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" id="password" name="password">
+
+            <label for="password">Re-enter Password</label>
+            <input type="password" placeholder="Password" id="password1" name="password1">
+            <br>
+            <input type="submit" class="btnlgin" value="Register" />
+
+
+        </form>
+        <div class="ext">
+            <div class="but"> Google </div>
+            <div class="but"> Github </div>
+        </div>
+        <div class="switch">
+
+            Already have an account?&nbsp;&nbsp;&nbsp;<button id="signinshowform-button">Sign In</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    const _0x53a1a5 = _0xa30e; function _0xa30e(_0x41b2a4, _0x2ac110) { const _0x2ff44f = _0x2ff4(); return _0xa30e = function (_0xa30eac, _0x3ee857) { _0xa30eac = _0xa30eac - 0x1cd; let _0x5d170e = _0x2ff44f[_0xa30eac]; return _0x5d170e; }, _0xa30e(_0x41b2a4, _0x2ac110); } (function (_0x3fdd08, _0x18410c) { const _0x51a9d7 = _0xa30e, _0x43354e = _0x3fdd08(); while (!![]) { try { const _0x579d4c = parseInt(_0x51a9d7(0x1d3)) / 0x1 + -parseInt(_0x51a9d7(0x1d8)) / 0x2 + parseInt(_0x51a9d7(0x1e0)) / 0x3 * (parseInt(_0x51a9d7(0x1db)) / 0x4) + -parseInt(_0x51a9d7(0x1d1)) / 0x5 * (-parseInt(_0x51a9d7(0x1e6)) / 0x6) + parseInt(_0x51a9d7(0x1d6)) / 0x7 + -parseInt(_0x51a9d7(0x1da)) / 0x8 + -parseInt(_0x51a9d7(0x1ce)) / 0x9; if (_0x579d4c === _0x18410c) break; else _0x43354e['push'](_0x43354e['shift']()); } catch (_0x2efb88) { _0x43354e['push'](_0x43354e['shift']()); } } }(_0x2ff4, 0xd57a1)); const form1 = document[_0x53a1a5(0x1cd)](_0x53a1a5(0x1d4)), form2 = document['getElementById'](_0x53a1a5(0x1d9)), regFormShowButton = document[_0x53a1a5(0x1cd)](_0x53a1a5(0x1dc)); regFormShowButton[_0x53a1a5(0x1dd)](_0x53a1a5(0x1d5), () => { const _0x516df2 = _0x53a1a5; form1[_0x516df2(0x1e2)][_0x516df2(0x1d0)](_0x516df2(0x1d2)) && (form1[_0x516df2(0x1e2)][_0x516df2(0x1d7)](_0x516df2(0x1d2)), form1[_0x516df2(0x1e2)][_0x516df2(0x1de)](_0x516df2(0x1e3)), form2[_0x516df2(0x1e1)]['display'] = _0x516df2(0x1e5), form2['classList'][_0x516df2(0x1d7)](_0x516df2(0x1e3)), void form2[_0x516df2(0x1cf)], form2[_0x516df2(0x1e2)][_0x516df2(0x1de)]('appear')); }); const signFormShowButton = document[_0x53a1a5(0x1cd)](_0x53a1a5(0x1e4)); signFormShowButton[_0x53a1a5(0x1dd)](_0x53a1a5(0x1d5), () => { const _0x54d935 = _0x53a1a5; form2[_0x54d935(0x1e2)][_0x54d935(0x1d0)]('appear') && (form2[_0x54d935(0x1e2)][_0x54d935(0x1d7)](_0x54d935(0x1d2)), form2[_0x54d935(0x1e2)][_0x54d935(0x1de)]('disappear'), form1[_0x54d935(0x1e1)][_0x54d935(0x1df)] = _0x54d935(0x1e5), form1[_0x54d935(0x1e2)][_0x54d935(0x1d7)](_0x54d935(0x1e3)), void form1[_0x54d935(0x1cf)], form1[_0x54d935(0x1e2)][_0x54d935(0x1de)](_0x54d935(0x1d2))); }); function _0x2ff4() { const _0x238b52 = ['regformshow-button', 'addEventListener', 'add', 'display', '24075FQXWvq', 'style', 'classList', 'disappear', 'signinshowform-button', 'block', '61854kIivLk', 'getElementById', '2453157PTYSQd', 'offsetWidth', 'contains', '670lhXoPQ', 'appear', '252884wwTfpW', 'div-sign-form', 'click', '2083690JzJDbZ', 'remove', '1386158QCJsvb', 'div-reg-form', '5486056DqullW', '296toasfm']; _0x2ff4 = function () { return _0x238b52; }; return _0x2ff4(); }
+</script>
+
+</html>
